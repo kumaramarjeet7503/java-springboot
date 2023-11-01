@@ -11,14 +11,14 @@ public class Student {
 
 	@jakarta.persistence.Id
 	private int Id ;
-	
+
 	@Column(name="Course")
-	private String Course ;
+	private String course ;
 	@Column(name="City")
 	private String City ;
 	@Column(name="Name")
 	private String Name ;
-	
+
 
 	public int getId() {
 		return Id;
@@ -29,11 +29,11 @@ public class Student {
 	}
 
 	public String getCourse() {
-		return Course;
+		return course;
 	}
 
 	public void setCourse(String course) {
-		Course = course;
+		course = course;
 	}
 
 	public String getCity() {
@@ -59,25 +59,25 @@ public class Student {
 
 	public Student(String course, String city, String name) {
 		super();
-		Course = course;
+		course = course;
 		City = city;
 		Name = name;
 	}
 
 	@Override
 	public String toString() {
-		return "Student [Id=" + Id + ", Course=" + Course + ", Duration= , City=" + City + ", Name="
+		return "Student [Id=" + Id + ", Course=" + course + ", Duration= , City=" + City + ", Name="
 				+ Name + "]";
 	}
 
 	public Student() {
-		
+
 	}
 
 	public Student(int id, String course, double duration, String city, String name) {
 		super();
 		Id = id;
-		Course = course;
+		course = course;
 		City = city;
 		Name = name;
 	}
