@@ -33,7 +33,7 @@ public class SpringbootJpaApplication {
 
 //	  Find all existing student
 	  Iterable<Student> students = dao.findAll() ;
-
+//
 	  students.forEach(student->System.out.println(student));
 
 //	    Derived Query for getting data
@@ -41,6 +41,8 @@ public class SpringbootJpaApplication {
 	  List<Student> studentsCourse =  dao.findByCourse("springboot");
 	  studentsByName.forEach(student->System.out.println(student)) ;
 	  List<Student> studentsNameAndCity =  dao.findByNameAndCity( "surya","Lonalva") ;
+	  List<Student> students = dao.getAllStudent("Amarjeet") ;
+	  students.forEach(student->{ System.out.println(student); });
 
 	}
 
