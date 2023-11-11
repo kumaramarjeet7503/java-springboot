@@ -1,6 +1,7 @@
 package com.api.springbootrestapi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.service.annotation.DeleteExchange;
+
 import com.api.springbootrestapi.entities.Book;
 import com.api.springbootrestapi.service.BookService;
 import java.util.* ;
@@ -31,6 +34,7 @@ public class BookController {
 
     //  Get single book
     //  Get Mapping is a combination of request mapping with type get
+    // {id} is the id passed by the user
     @GetMapping("/get-books/{id}")
     public Book getBook(@PathVariable("id") int id)
     {
@@ -53,6 +57,7 @@ public class BookController {
         return books ;
     }
 
+    //  For handling post data from postman
     @PostMapping("/create-book")
     public List<Book> createBook(@RequestBody Book book)
     {
@@ -60,4 +65,9 @@ public class BookController {
         return books ;
     }
 
+    @DeleteMapping("/delete-book/{id}")
+    public void deleteBook(@PathVariable("id") int id)
+    {
+        bookService.deleteBook(id);
+    }
 }

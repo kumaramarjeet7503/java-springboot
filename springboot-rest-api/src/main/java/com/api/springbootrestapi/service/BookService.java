@@ -28,9 +28,16 @@ public class BookService {
         return books ;
     }
 
+    //  Add new book via post request
     public List<Book> createBook(Book book)
     {
         books.add(book) ;
         return books ;
+    }
+
+    //  Delete existing book as per the request
+    public void deleteBook(int id)
+    {
+        books = books.stream().filter(book -> book.getId() != id).collect(Collectors.toList()) ;
     }
 }
