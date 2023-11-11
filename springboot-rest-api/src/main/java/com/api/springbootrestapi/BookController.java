@@ -2,6 +2,9 @@ package com.api.springbootrestapi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,17 +31,18 @@ public class BookController {
 
     //  Get single book
     //  Get Mapping is a combination of request mapping with type get
-    @GetMapping("/get-books")
-    public Book getBook()
+    @GetMapping("/get-books/{id}")
+    public Book getBook(@PathVariable("id") int id)
     {
-        Book book = new Book(1,"Death","Shankara") ;
+        Book book = bookService.getSingleBook(id) ;
+       
         return book ;
     }
 
     @GetMapping("/get-single-book")
     public Book getSingleBook()
     {
-       Book book = bookService.getSingleBook(1) ;
+        Book book = new Book(1,"Death","Shankara") ;
         return book ;
     }
 
@@ -46,6 +50,13 @@ public class BookController {
     public List<Book> getAllBooks()
     {
         List<Book> books = bookService.getAllBook() ;
+        return books ;
+    }
+
+    @PostMapping("/create-book")
+    public List<Book> createBook(@RequestBody Book book)
+    {
+        List<Book> books = bookService.createBook(book) ;
         return books ;
     }
 

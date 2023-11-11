@@ -27,4 +27,10 @@ public class BookService {
     {
         return books ;
     }
+
+    public List<Book> createBook(Book book)
+    {
+        books.add(book) ;
+        return books ;
+    }
 }
