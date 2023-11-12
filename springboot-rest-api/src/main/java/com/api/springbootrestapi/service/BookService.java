@@ -19,7 +19,12 @@ public class BookService {
     public Book getSingleBook(int id)
     {
         //  Compare object id in a list and get single book object
-        Book book = books.stream().filter(e->e.getId() == id).findFirst().get() ;
+        Book book = null ;
+        try {
+             book = books.stream().filter(e->e.getId() == id).findFirst().get() ;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
         return book ;
     }
 

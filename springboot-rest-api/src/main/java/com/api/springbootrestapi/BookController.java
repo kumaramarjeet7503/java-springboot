@@ -1,5 +1,8 @@
 package com.api.springbootrestapi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,11 +40,16 @@ public class BookController {
     //  Get Mapping is a combination of request mapping with type get
     // {id} is the id passed by the user
     @GetMapping("/get-books/{id}")
-    public Book getBook(@PathVariable("id") int id)
+    public ResponseEntity<Book> getBook(@PathVariable("id") int id)
     {
         Book book = bookService.getSingleBook(id) ;
-       
-        return book ;
+        if(book == null)
+        {
+            //  For sending response with status not found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build() ;
+        }
+        //  sending data via response entity
+        return ResponseEntity.of(Optional.of(book)) ;
     }
 
     @GetMapping("/get-single-book")
@@ -52,30 +60,51 @@ public class BookController {
     }
 
     @GetMapping("/get-all-book")
-    public List<Book> getAllBooks()
+    public ResponseEntity<List<Book>> getAllBooks()
     {
         List<Book> books = bookService.getAllBook() ;
-        return books ;
+        if(books.isEmpty())
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build() ;
+        }
+        return ResponseEntity.of(Optional.of(books)) ;
     }
 
     //  For handling post data from postman
     @PostMapping("/create-book")
-    public List<Book> createBook(@RequestBody Book book)
+    public ResponseEntity<List<Book>> createBook(@RequestBody Book book)
     {
-        List<Book> books = bookService.createBook(book) ;
-        return books ;
+        try {
+             List<Book> books = bookService.createBook(book) ;
+             return ResponseEntity.of(Optional.of(books)) ;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build() ;
     }
 
     @DeleteMapping("/delete-book/{id}")
-    public void deleteBook(@PathVariable("id") int id)
+    public ResponseEntity<Void> deleteBook(@PathVariable("id") int id)
     {
-        bookService.deleteBook(id);
+        try {
+            bookService.deleteBook(id);
+           
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+         return ResponseEntity.status(HttpStatus.NO_CONTENT).build() ;
     }
 
     @PutMapping("/update-book/{id}")
-    public List<Book> updateBook( @RequestBody Book book , @PathVariable("id") int id )
+    public ResponseEntity<List<Book>> updateBook( @RequestBody Book book , @PathVariable("id") int id )
     {
-        List<Book> books = bookService.updateBook(id, book) ;
-        return books ;
+        try {
+          List<Book> books = bookService.updateBook(id, book) ;
+           return ResponseEntity.of(Optional.of(books)) ;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build() ;
     }
 }
