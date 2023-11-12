@@ -40,4 +40,20 @@ public class BookService {
     {
         books = books.stream().filter(book -> book.getId() != id).collect(Collectors.toList()) ;
     }
+
+    //  Update existing book records via API 
+    public List<Book> updateBook(int id, Book updatedBook)
+    {
+        // books = books.stream() ;
+       books.stream().map(b -> {
+            if(b.getId() == id)
+            {
+                b.setAuthor(updatedBook.getAuthor()) ;
+                b.setName(updatedBook.getName()); 
+            }
+            return b ;
+        }).collect(Collectors.toList()) ;
+     
+        return books ;
+    }
 }
