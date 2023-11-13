@@ -52,12 +52,12 @@ public class BookController {
         return ResponseEntity.of(Optional.of(book)) ;
     }
 
-    @GetMapping("/get-single-book")
-    public Book getSingleBook()
-    {
-        Book book = new Book(1,"Death","Shankara") ;
-        return book ;
-    }
+    // @GetMapping("/get-single-book")
+    // public Book getSingleBook()
+    // {
+    //     Book book = new Book(1,"Death","Shankara") ;
+    //     return book ;
+    // }
 
     @GetMapping("/get-all-book")
     public ResponseEntity<List<Book>> getAllBooks()
