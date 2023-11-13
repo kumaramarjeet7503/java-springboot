@@ -2,15 +2,24 @@ package com.api.springbootrestapi.helper;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
-public class FileUploadHelper {
+public class FileUploadHelper  {
     
-    public final static String UPLOAD_DIR = "F:\\Java\\Git\\java-springboot\\springboot-rest-api\\src\\main\\resources\\static" ; 
+    // public final static String UPLOAD_DIR = "F:\\Java\\Git\\java-springboot\\springboot-rest-api\\src\\main\\resources\\static" ; 
+    //  get dynamic path of file upload
+    public final static String UPLOAD_DIR = new ClassPathResource("/static/images/").getFile().getAbsolutePath() ;
+
+    public FileUploadHelper()  throws IOException
+    {
+
+    }
 
     public boolean uploadFile(MultipartFile file)
     {
