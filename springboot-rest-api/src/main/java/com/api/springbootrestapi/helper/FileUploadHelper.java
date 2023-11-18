@@ -14,7 +14,7 @@ public class FileUploadHelper  {
     
     // public final static String UPLOAD_DIR = "F:\\Java\\Git\\java-springboot\\springboot-rest-api\\src\\main\\resources\\static" ; 
     //  get dynamic path of file upload
-    public final static String UPLOAD_DIR = new ClassPathResource("/static/images/").getFile().getAbsolutePath() ;
+    public static String UPLOAD_DIR = new ClassPathResource("/static/images/").getFile().getAbsolutePath() ;
 
     public FileUploadHelper()  throws IOException
     {
