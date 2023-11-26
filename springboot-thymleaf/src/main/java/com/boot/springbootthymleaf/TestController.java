@@ -20,4 +20,10 @@ public class TestController {
         return "about" ;
     }
 
+    @GetMapping("/base")
+    public String base()
+    {
+        return "extend" ;
+    }
+
 }
