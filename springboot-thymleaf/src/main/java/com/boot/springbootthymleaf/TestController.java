@@ -2,6 +2,7 @@ package com.boot.springbootthymleaf ;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,9 +42,13 @@ public class TestController {
     }
 
     @PostMapping("/process")
-    public String formSubmit(@Valid @ModelAttribute("userData") UserData userData)
+    public String formSubmit(@Valid @ModelAttribute("userData") UserData userData, BindingResult result)
     {
-        
+        System.out.println(result);
+        if(result.hasErrors())
+        {
+            System.out.println(result);
+        }
         return "form" ;
     }
 
