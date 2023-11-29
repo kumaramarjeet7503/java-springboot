@@ -1,11 +1,11 @@
 package com.contact.smartmanagerspringsecurity.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.contact.smartmanagerspringsecurity.dao.UserRepository;
+import com.contact.smartmanagerspringsecurity.entitity.User;
 
 @Controller
 public class HomeController {
