@@ -1,3 +1,15 @@
-body{
-    background-color: orangered;
+
+
+.primary
+{
+    background-color: greenyellow !important;
+}
+
+#banner
+{
+    background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)) , url('../images/smart.jpeg');
+    background-size: cover;
+    width: 100%;
+    height: 93vh;
+    color: white;
 }
