@@ -103,4 +103,13 @@ public class User {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+// Added to string 
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", about=" + about
+                + ", enabled=" + enabled + ", role=" + role + ", imageUrl=" + imageUrl + ", contacts=" + contacts + "]";
+    }
+
+    
 }
