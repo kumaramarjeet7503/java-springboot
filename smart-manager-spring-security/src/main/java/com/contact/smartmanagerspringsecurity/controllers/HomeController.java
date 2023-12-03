@@ -1,12 +1,14 @@
 package com.contact.smartmanagerspringsecurity.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.contact.smartmanagerspringsecurity.dao.UserRepository;
 import com.contact.smartmanagerspringsecurity.entitity.Message;
@@ -16,10 +18,14 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
+@RequestMapping("/public")
 public class HomeController {
     
     @Autowired
     private UserRepository userRepository ;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder ;
 
     @GetMapping("/create-user")
     public String createUser()
@@ -76,6 +82,7 @@ public class HomeController {
 
             user.setEnabled(true);
             user.setRole("USER");
+            user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
             this.userRepository.save(user);    
             user = new User() ; 
         
