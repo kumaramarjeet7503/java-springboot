@@ -3,6 +3,7 @@ package com.contact.smartmanagerspringsecurity.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import com.contact.smartmanagerspringsecurity.entitity.Message;
 import com.contact.smartmanagerspringsecurity.entitity.User;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -61,15 +63,21 @@ public class HomeController {
 
     // Registration process
         @PostMapping("/register")
-    public String register(@ModelAttribute("user") User user,Model m, HttpSession session)
+    public String register(@Valid @ModelAttribute("user") User user,BindingResult result ,Model m, HttpSession session)
     {
         try{
-        user.setEnabled(true);
-        user.setRole("USER");
-        // dfas ;
-        this.userRepository.save(user);    
-        // dfsa ;
-        user = new User() ; 
+  System.out.println(result); 
+            if(result.hasErrors())
+            {
+                 m.addAttribute("user", user) ; 
+               
+                return "signup" ;
+            }
+
+            user.setEnabled(true);
+            user.setRole("USER");
+            this.userRepository.save(user);    
+            user = new User() ; 
         
         }catch(Exception e)
         {

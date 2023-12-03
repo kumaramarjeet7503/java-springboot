@@ -19,6 +19,8 @@ public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private   int id ;
+
+    @jakarta.validation.constraints.NotBlank(message="Field cannot be empty!") 
     private String name ;
     @Column(unique = true)
     private String email ;
