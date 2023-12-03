@@ -51,7 +51,7 @@ public class HomeController {
         return "about" ;
     }
 
-     @GetMapping("/login")
+     @GetMapping("/signin")
     public String login(Model m)
     {
         m.addAttribute("title","Smart Contact : Login") ;

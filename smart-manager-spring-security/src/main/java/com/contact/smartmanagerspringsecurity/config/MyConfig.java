@@ -21,13 +21,16 @@ public class MyConfig  {
         try {
             httpSecurity.csrf().disable()
             .authorizeHttpRequests()
-            .requestMatchers("/user/**")
+            .requestMatchers("/user")
             .hasRole("USER")
             .requestMatchers("/public/**")
             .permitAll()
              .anyRequest()
              .authenticated()
-            .and().formLogin() ;
+             .and().formLogin()
+            .loginPage("/public/signin")
+            .defaultSuccessUrl("/user/index",true)
+            .failureUrl("/public/signin");
                         // .hasRole("USER")
         } catch (Exception e) {
             
