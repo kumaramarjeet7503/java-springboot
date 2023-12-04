@@ -55,7 +55,16 @@
 
         <!-- Content -->
         
-        <div class="content" id="content"><span id="reopen" style="font-weight: bolder; "  onclick="manageNav()" >☰</span>  <div th:replace="${content}"></div></div>
+        <div class="content" id="content">
+          <span id="reopen" style="font-weight: bolder; "  onclick="manageNav()" >☰</span>
+          
+          <div th:if="${session.message}" class="text-center alert " th:classAppend="${session.message.type}" role="alert">
+            <p th:text = "${session.message.content}" ></p>
+          </div>
+
+           <div th:replace="${content}">
+           </div>
+          </div>
 
   
 

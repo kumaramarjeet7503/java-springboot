@@ -19,7 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model ;
 import com.contact.smartmanagerspringsecurity.dao.UserRepository;
 import com.contact.smartmanagerspringsecurity.entitity.Contact;
+import com.contact.smartmanagerspringsecurity.entitity.Message;
 import com.contact.smartmanagerspringsecurity.entitity.User;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -54,20 +57,29 @@ public class UserController {
     }
 
     @PostMapping("process-contact")
-    public String processContact(@ModelAttribute("contact") Contact contact,@RequestParam("profileImage") MultipartFile file , Model model) throws IOException{
-        User user = (User) model.getAttribute("user") ;
-        contact.setUser(user);
-        //  File uploading with file copy function
-        if(!file.isEmpty())
-        {
-            contact.setImage(file.getOriginalFilename());
-            File saveFile = new ClassPathResource("static/images").getFile() ;
-            java.nio.file.Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename()) ;
-            Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING) ;
-        }
+    public String processContact(@ModelAttribute("contact") Contact contact,@RequestParam("profileImage") MultipartFile file , Model model, HttpSession session) throws IOException{
+       
+        try{
+            User user = (User) model.getAttribute("user") ;
+            contact.setUser(user);
+            //  File uploading with file copy function
+            if(!file.isEmpty())
+            {
+                contact.setImage(file.getOriginalFilename());
+                File saveFile = new ClassPathResource("static/images").getFile() ;
+                java.nio.file.Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename()) ;
+                Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING) ;
+            }
 
-        user.getContacts().add(contact) ;
-        this.userRepository.save(user) ;
+            user.getContacts().add(contact) ;
+            this.userRepository.save(user) ;
+            session.setAttribute("message",new Message("Contact Added succesfully !!", "alert-success")) ;
+        }catch(Exception e)
+        {
+            session.setAttribute("message",new Message("Contact Added succesfully !!", "alert-danger")) ;
+            e.printStackTrace();
+
+        }
         return "add_contact" ;
     }
 }
