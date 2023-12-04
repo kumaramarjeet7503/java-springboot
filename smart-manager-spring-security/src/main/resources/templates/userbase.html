@@ -10,10 +10,11 @@
    
     <title>home</title>
   </head>
-  <body>
+  <body style="background-color:  rgb(220, 216, 216)">
     
         <!-- Navbar starts -->
         <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+         
             <a class="navbar-brand text-white" href="#">Smart Contact</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,6 +29,9 @@
                 <a class="nav-link text-white" th:href="@{/about}">About</a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link text-white" th:text="${user.name}"></a>
+                  </li>
+                <li class="nav-item">
                   <a class="nav-link text-white" th:href="@{/logout}" tabindex="-1" >Logout</a>
                   </li>
             </ul>
@@ -39,7 +43,21 @@
         </nav>
         <!-- Navbar ends -->
 
-    <div th:replace="${content}"></div>
+        <div class="sidebar" style="display: none;" id="sidebar">
+          <span class="closeBtn" style="color: black; font-weight: bold;" onclick="manageNav()">X</span>
+            <a href="#" class="item">Home</a>
+            <a href="#" class="item">View Contacts</a>
+            <a th:href="@{/user/add-contact}" class="item">Add Contact</a>
+            <a href="#" class="item">Your Profile</a>
+            <a href="#" class="item">Settings</a>
+            <a th:href="@{/logout}" class="item">Logout</a>
+        </div>
+
+        <!-- Content -->
+        
+        <div class="content" id="content"><span id="reopen" style="font-weight: bolder; "  onclick="manageNav()" >☰</span>  <div th:replace="${content}"></div></div>
+
+  
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

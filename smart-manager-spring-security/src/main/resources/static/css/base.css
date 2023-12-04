@@ -13,3 +13,58 @@
     height: 93vh;
     color: white;
 }
+
+/*  For side bar */
+.sidebar
+{
+    width: 15%;
+    background : white;
+    height: 100vh;
+    position: fixed;
+}
+
+.sidebar a{
+    display: block;
+    width: 100%;
+    padding: 10px 25px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+}
+
+.sidebar .closeBtn{
+     /* position: absolute; */
+    width: 100%;
+    right: 35px;
+    cursor: pointer; 
+    margin-left: 90%;
+    margin-top: 5%;
+}
+
+.closeBtn a:hover{
+    background-color: white;
+}
+
+.sidebar a:hover{
+    background-color:rgb(220, 216, 216);
+}
+
+.content
+{
+    margin-left: 2%;
+}
+
+#reopen{
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px){
+    .sidebar{
+        display: none;
+        height: 100vh;
+        padding-top: 20px ;
+    }
+    .content{
+        margin-left: 0% !important;
+    }
+}
