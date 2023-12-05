@@ -6,17 +6,21 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.domain.JpaSort.Path;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model ;
+
+import com.contact.smartmanagerspringsecurity.dao.ContactRepository;
 import com.contact.smartmanagerspringsecurity.dao.UserRepository;
 import com.contact.smartmanagerspringsecurity.entitity.Contact;
 import com.contact.smartmanagerspringsecurity.entitity.Message;
@@ -31,6 +35,8 @@ public class UserController {
     
     @Autowired
     private UserRepository userRepository ;
+        @Autowired
+    private ContactRepository contactRepository ;
 
     @ModelAttribute
     public void getUser(Model model,Principal principal)
@@ -81,5 +87,14 @@ public class UserController {
 
         }
         return "add_contact" ;
+    }
+
+    @GetMapping("/view-contact")
+    public String viewContact(Model model){
+
+        User user = (User) model.getAttribute("user") ;
+        List<Contact> contacts =  this.contactRepository.getContactsByUserId(user.getId()) ;
+        model.addAttribute("contacts",contacts) ;
+        return "view_contact" ;
     }
 }
