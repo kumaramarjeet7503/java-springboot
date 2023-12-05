@@ -25,7 +25,7 @@
 
                       <tr th:each="c : ${contacts}">
                         <th scope="row"  th:text="${c.cId}" ></th>
-                        <td th:text="${c.name}"></td>
+                        <td ><img id="profilePic" th:src="@{'/images/'+${c.image}}"><span th:text="${c.name}"></span></td>
                         <td th:text="${c.work}"></td>
                         <td th:text="${c.email}"></td>
                         <td th:text="${c.phone}"></td>
@@ -33,6 +33,13 @@
                       </tr>
                     </tbody>
                   </table>
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li th:if="${currentPage != 0}" class="page-item"><a class="page-link" th:href="@{'/user/view-contact/'+${currentPage - 1}}">Previous</a></li>
+                      <li th:classAppend="${currentPage == i -1 ? 'active' : ''}" th:each="i : ${#numbers.sequence(1,totalPage)}" class="page-item"><a class="page-link" th:text="${i}" th:href="@{'/user/view-contact/'+${i-1}}"></a></li>
+                      <li th:if="${totalPage -1  != currentPage }" class="page-item"><a class="page-link" th:href="@{'/user/view-contact/'+${currentPage + 1}}">Next</a></li>
+                    </ul>
+                  </nav>
                 </div>
                 </div>
     </section>

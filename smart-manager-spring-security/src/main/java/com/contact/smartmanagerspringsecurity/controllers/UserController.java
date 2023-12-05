@@ -8,12 +8,16 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
 
+import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.JpaSort.Path;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,6 +72,7 @@ public class UserController {
         try{
             User user = (User) model.getAttribute("user") ;
             contact.setUser(user);
+            contact.setImage("contact.png") ;
             //  File uploading with file copy function
             if(!file.isEmpty())
             {
@@ -89,12 +94,18 @@ public class UserController {
         return "add_contact" ;
     }
 
-    @GetMapping("/view-contact")
-    public String viewContact(Model model){
+    @GetMapping("/view-contact/{page}")
+    public String viewContact(@PathVariable("page") Integer page  ,Model model){
+
+        //  Set pagination 
+        org.springframework.data.domain.Pageable pageable = PageRequest.of(page,5) ;
 
         User user = (User) model.getAttribute("user") ;
-        List<Contact> contacts =  this.contactRepository.getContactsByUserId(user.getId()) ;
+        org.springframework.data.domain.Page<Contact> contacts =  this.contactRepository.getContactsByUserId(user.getId(),pageable) ;
+        
         model.addAttribute("contacts",contacts) ;
+        model.addAttribute("currentPage",page) ;
+        model.addAttribute("totalPage", contacts.getTotalPages()) ;
         return "view_contact" ;
     }
 }
