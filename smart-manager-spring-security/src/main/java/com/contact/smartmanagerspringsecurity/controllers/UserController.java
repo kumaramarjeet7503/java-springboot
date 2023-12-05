@@ -121,4 +121,17 @@ public class UserController {
 
         return "brief_contact" ;
     }
+
+            @GetMapping("/delete-contact/{cId}")
+    public String deleteContact(@PathVariable("cId") Integer cId  ,Model model, HttpSession session ){
+
+        Optional<Contact> optContact = this.contactRepository.findById(cId) ;
+        Contact  contact = optContact.get() ;
+
+        this.contactRepository.delete(contact);
+        session.setAttribute("message", new Message("Contact has been deleted !!","alert-success")) ;
+        User user = (User) model.getAttribute("user") ;
+
+        return "redirect:/user/view-contact/0" ;
+    }
 }
