@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace = "userbase::layout(~{::section})">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+</head>
+<body>
+    <section>
+        <div class="card mr-4 text-center">
+            <div class="card-body" >
+                <div class="form-group">
+                  <img style="border-radius: 50%; width: 100px; height: 100px;" th:src="@{'/images/'+${contact.image}}">
+                  <h3 th:text="${contact.name}"></h3>
+                </div>
+
+                <table class="table">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Name</th>
+                        <td th:text="${contact.name}"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Nick Name</th>
+                        <td th:text="${contact.nickName}"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Email</th>
+                        <td th:text="${contact.email}"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Phone</th>
+                        <td th:text="${contact.phone}"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Work</th>
+                        <td th:text="${contact.work}"></td>
+                      </tr>
+                      <tr>
+                        <td th:text="${contact.description}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+                </div>
+    </section>
+</body>
+</html>

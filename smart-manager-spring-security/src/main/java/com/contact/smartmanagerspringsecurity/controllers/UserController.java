@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,5 +108,17 @@ public class UserController {
         model.addAttribute("currentPage",page) ;
         model.addAttribute("totalPage", contacts.getTotalPages()) ;
         return "view_contact" ;
+    }
+
+        @GetMapping("/brief-contact/{cId}")
+    public String briefContact(@PathVariable("cId") Integer cId  ,Model model){
+
+        Optional<Contact> optContact = this.contactRepository.findById(cId) ;
+        Contact  contact = optContact.get() ;
+
+        model.addAttribute("contact", contact) ;
+        User user = (User) model.getAttribute("user") ;
+
+        return "brief_contact" ;
     }
 }
