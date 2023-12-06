@@ -134,4 +134,44 @@ public class UserController {
 
         return "redirect:/user/view-contact/0" ;
     }
+
+    @GetMapping("/update-contact/{cId}")
+    public String updateContact(@PathVariable("cId") Integer cId , Model model, HttpSession session){
+    
+        Optional<Contact> optContact = this.contactRepository.findById(cId) ;
+        Contact  contact = optContact.get() ;
+
+        model.addAttribute("contact", contact) ;
+
+        return "update_contact" ;
+    }
+
+        @PostMapping("edit-contact")
+    public String editContact(@ModelAttribute("contact") Contact contact,@RequestParam("profileImage") MultipartFile file , Model model, HttpSession session) throws IOException{
+       
+        try{
+            User user = (User) model.getAttribute("user") ;
+            contact.setUser(user);
+
+            
+            //  File uploading with file copy function
+            if(!file.isEmpty())
+            {
+                contact.setImage(file.getOriginalFilename());
+                File saveFile = new ClassPathResource("static/images").getFile() ;
+                java.nio.file.Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename()) ;
+                Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING) ;
+            }
+
+            this.contactRepository.save(contact) ;
+            session.setAttribute("message",new Message("Contact Updated succesfully !!", "alert-success")) ;
+        }catch(Exception e)
+        {
+            session.setAttribute("message",new Message("Error while updating contact !!", "alert-danger")) ;
+            e.printStackTrace();
+
+        }
+        return "redirect:/user/view-contact/0" ;
+    }
+
 }

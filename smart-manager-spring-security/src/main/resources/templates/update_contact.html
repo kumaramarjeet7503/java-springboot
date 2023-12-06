@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace = "userbase::layout(~{::section})">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+</head>
+<body>
+    <section>
+  <div class="card mr-4">
+    <div class="card-body" >
+        <form th:action="@{/user/edit-contact}" method="post" enctype="multipart/form-data" th:object="${contact}">
+            <h2> Update Contact </h2>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Name</label>
+                <input type="text" class="form-control" th:value="${contact.name}" name="name" id="inputEmail4" placeholder="Name">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Nickname</label>
+                <input type="text" class="form-control"  id="inputPassword4" th:value="${contact.nickName}" name="nickName" placeholder="Enter contact nick name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress">Work</label>
+              <input type="text" class="form-control" name="work" th:value="${contact.work}" id="inputAddress" placeholder="Enter your work">
+            </div>
+            <div class="form-group">
+              <label for="inputAddress2">Email</label>
+              <input type="email" name="email" class="form-control" id="inputAddress2" th:value="${contact.email}" placeholder="Email">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputCity">Phone</label>
+                <input type="text" class="form-control"  th:value="${contact.phone}"  name="phone" maxlength="10" id="inputCity">
+              </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputZip">Description</label>
+                    <textarea  class="form-control" name="description" th:text="${contact.description}" id="inputZip"></textarea>
+                  </div>
+                  <div class="form-group">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" name="profileImage"  class="custom-file-input" id="inputGroupFile01">
+                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+                <input type="hidden" th:value="${contact.cId}" name="cId"  />
+                  </div>
+            <button type="submit" style="float: right;" class="btn btn-primary">Update</button>
+          </form>
+        </div>
+    </div>
+     </section>
+</body>
+</html>

@@ -29,7 +29,7 @@
                         <td th:text="${c.work}"></td>
                         <td ><a  th:text="${c.email}" th:href="@{'/user/brief-contact/'+${c.cId}}"></a></td>
                         <td th:text="${c.phone}"></td>
-                        <td ><button class="btn btn-primary mr-2">Update</button><a class="btn btn-danger text-white" th:href="@{'/user/delete-contact/'+${c.cId}}" >Delete</a></td>
+                        <td ><a class="btn btn-primary mr-2" th:href="@{'/user/update-contact/'+${c.cId}}" >Update</a><a class="btn btn-danger text-white" th:href="@{'/user/delete-contact/'+${c.cId}}" >Delete</a></td>
                       </tr>
                     </tbody>
                   </table>
