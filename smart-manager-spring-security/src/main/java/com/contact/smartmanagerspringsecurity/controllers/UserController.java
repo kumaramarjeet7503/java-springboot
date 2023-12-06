@@ -153,7 +153,7 @@ public class UserController {
             User user = (User) model.getAttribute("user") ;
             contact.setUser(user);
 
-            
+
             //  File uploading with file copy function
             if(!file.isEmpty())
             {
@@ -172,6 +172,12 @@ public class UserController {
 
         }
         return "redirect:/user/view-contact/0" ;
+    }
+
+    @GetMapping("/profile")
+    public String getProfile(Model model){
+     
+        return "user_profile" ;
     }
 
 }

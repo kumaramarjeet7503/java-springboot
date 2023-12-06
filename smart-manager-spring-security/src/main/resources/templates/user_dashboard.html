@@ -8,10 +8,16 @@
 </head>
 <body>
     <section>
-        <p th:text="${user.name}" ></p>
-            <p th:text="${user.email}" ></p>
-                <p th:text="${user.password}" ></p>
-                    <p th:text="${user.about}" ></p>
-     </section>
+        <div class="card mr-4 text-center">
+            <div class="card-body" >
+                <div class="form-group">
+                  <img style=" width: 40%; height: 40%;" th:src="@{'/images/user/phone.jpg'}">
+                  <h2 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> Start adding your contacts to cloud</h2>
+                  <a class="btn btn-primary btn-block text-white" th:href="@{'/user/add-contact'}">Add New Contact</a>
+                </div>
+
+                </div>
+                </div>
+    </section>
 </body>
 </html>

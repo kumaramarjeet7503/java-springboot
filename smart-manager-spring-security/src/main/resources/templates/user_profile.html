@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace = "userbase::layout(~{::section})">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+</head>
+<body>
+    <section>
+        <div class="card mr-4 text-center">
+            <div class="card-body" >
+                <div class="form-group">
+                  <img style="border-radius: 50%; width: 100px; height: 100px;" th:src="@{'/images//user/'+${user.imageUrl}}">
+                  <h3 th:text="${user.name}"></h3>
+                </div>
+                <table class="table">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Name</th>
+                        <td th:text="${user.name}"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Role</th>
+                        <td th:text="${user.role}"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Email</th>
+                        <td th:text="${user.email}"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">About</th>
+                        <td th:text="${user.about}"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Active</th>
+                        <td th:text="${user.enabled ? 'true' : 'false'}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+                </div>
+    </section>
+</body>
+</html>
