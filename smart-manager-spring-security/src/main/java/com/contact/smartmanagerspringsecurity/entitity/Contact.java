@@ -1,5 +1,7 @@
 package com.contact.smartmanagerspringsecurity.entitity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +25,7 @@ public class Contact {
     private String description ;
 
     @ManyToOne
+    @JsonIgnore
     private User user ;
 
     public User getUser() {

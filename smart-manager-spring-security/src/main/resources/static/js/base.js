@@ -11,3 +11,13 @@ function manageNav(){
         content.style.marginLeft = '17%' ;
     }
 }
+
+function getSearch(e)
+{
+    $('#search-result').hide() ;
+    if(e.value != '')
+    {
+        $('#search-result').show() ;
+    }
+    
+}

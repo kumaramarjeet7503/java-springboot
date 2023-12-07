@@ -15,7 +15,7 @@ public class EmailController {
     @Autowired
     private com.contact.smartmanagerspringsecurity.service.EmailService emailService ;
     
-    @PostMapping("/send/email")
+    @PostMapping("public/send/email")
     public ResponseEntity<?> email(@RequestBody EmailRequest emailRequest)
     {
         

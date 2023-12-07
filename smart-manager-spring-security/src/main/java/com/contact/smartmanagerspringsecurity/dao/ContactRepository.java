@@ -13,4 +13,6 @@ import java.util.List;
 public interface ContactRepository extends JpaRepository < Contact , Integer> {
     @Query("select u from Contact u where u.user.id = :userId")
     public  Page<Contact> getContactsByUserId(@Param("userId") Integer userId,Pageable pageable ) ;
+
+    public List<Contact> findContactByNameContainingAndUser(String name, User user) ;
 }
