@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace = "userbase::layout(~{::section})">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+</head>
+<body>
+    <section>
+        <div class="card mr-4 ">
+            <div class="card">
+            <div class="card-body" >
+              
+                    <form th:action="@{/user/change-pass}" method="post">
+                        <h2>Change Password</h2>
+                        <div class="form-group">
+                          <label for="exampleInputEmail3">Old Password</label>
+                          <input type="text" class="form-control" name="oldPass" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter old password">
+                          
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail4">New Password</label>
+                            <input type="text" class="form-control" name="newPass" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter new password">
+                            
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail4">Confirm Password</label>
+                            <input type="text" class="form-control" name="confirmPass" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter change password">
+                            
+                          </div>
+                          <div class="form-group text-right">
+                        <button type="submit" class="btn btn-primary ">Change</button>
+                    </div>
+                      </form>
+                </div>
+                </div>
+            </div>
+              
+    </section>
+</body>
+</html>

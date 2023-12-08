@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.P
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.JpaSort.Path;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,6 +43,9 @@ public class UserController {
     private UserRepository userRepository ;
         @Autowired
     private ContactRepository contactRepository ;
+
+     @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder ;
 
     @ModelAttribute
     public void getUser(Model model,Principal principal)
@@ -178,6 +182,32 @@ public class UserController {
     public String getProfile(Model model){
      
         return "user_profile" ;
+    }
+
+        @GetMapping("/settings")
+    public String getSetting(Model model){
+     
+        return "user_settings" ;
+    }
+
+    @PostMapping("/change-pass")
+    public String changePass(@RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass,@RequestParam("confirmPass") String confirmPass, Principal principal, Model model, HttpSession session )
+    {
+        User user = (User) model.getAttribute("user") ;
+        String existPass = user.getPassword() ;
+        if(!confirmPass.equals(newPass)){
+             session.setAttribute("message",new Message("New password is not same of confirm password !!", "alert-danger"));
+              return "user_settings" ;
+        } 
+        if(!this.bCryptPasswordEncoder.matches(oldPass,existPass)) {
+             session.setAttribute("message",new Message("Old password does not matches !!", "alert-danger"));
+             return "user_settings" ;
+        }
+
+        user.setPassword(this.bCryptPasswordEncoder.encode(newPass));
+        this.userRepository.save(user) ;
+        session.setAttribute("message",new Message("Password changed succesfully !!", "alert-success")) ;
+        return "redirect:/user/index" ;
     }
 
 }
