@@ -27,7 +27,7 @@ public class MyConfig  {
             .hasRole("USER")
             .requestMatchers("/public")
             .hasRole("USER")
-            .requestMatchers("/public/**")
+            .requestMatchers("/send/email")
             .permitAll()
              .anyRequest()
              .authenticated()

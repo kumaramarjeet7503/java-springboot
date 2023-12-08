@@ -4,6 +4,9 @@ public class EmailRequest {
     private String message ;
     private String to ;
     private String subject ;
+
+
+
     public EmailRequest(String message, String to, String subject) {
         this.message = message;
         this.to = to;

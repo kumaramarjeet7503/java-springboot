@@ -15,11 +15,10 @@ public class EmailController {
     @Autowired
     private com.contact.smartmanagerspringsecurity.service.EmailService emailService ;
     
-    @PostMapping("public/send/email")
+    @PostMapping("send/email")
     public ResponseEntity<?> email(@RequestBody EmailRequest emailRequest)
     {
-        
-        // this.emailService.sendEmail(emailRequest) ;
+        this.emailService.sendEmail( emailRequest.getSubject() , emailRequest.getMessage() , emailRequest.getTo()) ;
         return ResponseEntity.ok("done");
     }
 }
