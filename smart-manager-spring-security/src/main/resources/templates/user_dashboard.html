@@ -13,7 +13,10 @@
                 <div class="form-group">
                   <img style=" width: 40%; height: 40%;" th:src="@{'/images/user/phone.jpg'}">
                   <h2 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> Start adding your contacts to cloud</h2>
-                  <a class="btn btn-primary btn-block text-white" th:href="@{'/user/add-contact'}">Add New Contact</a>
+                  <a class="btn btn-primary btn-block text-white form-group" th:href="@{'/user/add-contact'}">Add New Contact</a>         
+                    <label class="" style="text-align: left;" >Donate us</label>
+                    <input type="number" id="payment_field" class="form-control form-group"  />
+                    <button class="btn btn-primary btn-block text-white" onclick="paymentStart()" id="checkout" >Checkout</button>                
                 </div>
 
                 </div>
