@@ -42,7 +42,7 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> postMethodName(@RequestBody Map<String, Object> data, Model model) throws RazorpayException {
+    public ResponseEntity<?> createOrder(@RequestBody Map<String, Object> data, Model model) throws RazorpayException {
         String paymentField = (String) data.get("paymentField") ;
         int amount =  Integer.parseInt(paymentField) ;
 
@@ -71,6 +71,16 @@ public class OrderController {
         return ResponseEntity.ok(order.toString());
     }
 
-
+    @PostMapping("/update")
+    public ResponseEntity<?> updateOrder(@RequestBody Map<String, Object> response) {
+        RazorOrder order = (RazorOrder)  this.orderRepository.findByOrderId((String)response.get("razorpay_order_id")) ;
+        String paymentId = (String) response.get("razorpay_payment_id") ;
+        String status = (String)  response.get("razorpay_status") ;
+        order.setPaymentId(paymentId) ;
+        order.setStatus((String) status);
+        this.orderRepository.save(order) ;
+        return ResponseEntity.ok(response);
+    }
+    
     
 }

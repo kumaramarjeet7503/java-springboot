@@ -61,9 +61,13 @@ const paymentStart = ()=>{
                         "order_id":response.id, //This is a sample Order ID. Pass the
 //                          Payment handler
                         "handler": function (response){
+                            console.log(response) ;
                             console.log(response.razorpay_payment_id);
                             console.log(response.razorpay_order_id);
                             console.log(response.razorpay_signature);
+
+                            updateOrder(response) ;
+
                             alert("Payment succesful") ;
                         },
                         "prefill": {
@@ -103,3 +107,25 @@ const paymentStart = ()=>{
     )
 }
 
+
+function updateOrder(response)
+{
+    $.ajax(
+        {    
+            url:'/order/update',
+            data:JSON.stringify({
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_status : "paid"
+            }),
+            contentType : "application/json",
+            type:'POST',
+            dataType : "json",
+            success:function(response){
+                alert("Your payment has been succesfully done") ; 
+            },
+            error: function(error){
+                alert("error while updating order. We will reach you soon") ;
+            }
+        })
+}

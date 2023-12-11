@@ -18,7 +18,16 @@ public class RazorOrder {
       private String  orderId ;
       private String  status ;
       private String  receipt ;
+      private String paymentId ;
       
+      public String getPaymentId() {
+            return paymentId;
+      }
+
+      public void setPaymentId(String paymentId) {
+            this.paymentId = paymentId;
+      }
+
       @ManyToOne
       private User user ;
 
