@@ -25,7 +25,7 @@ public class ExcelHelper {
 
     public static String FILE_NAME = "orders" ;
 
-    public static ByteArrayInputStream getData(List<Order> orders) throws IOException
+    public  ByteArrayInputStream getData(List<Order> orders) throws IOException
     {
         Workbook workbook = new XSSFWorkbook() ;
         ByteArrayOutputStream out = new ByteArrayOutputStream() ;  
