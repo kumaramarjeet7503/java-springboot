@@ -1,5 +1,5 @@
-# java-springboot
-Spring Boot is a Java framework that makes it easier to create and run Java applications. It simplifies the configuration and setup process, allowing developers to focus more on writing code for their applications.
+# Java-springboot
+The Spring boot-based Contact Manager is a robust CRUD application, utilizing JPA and MySQL for efficient database management. Integrated with Spring Security, it ensures secure access. Thymeleaf serves as the template engine, facilitating dynamic interaction, making contact management streamlined and intuitive.
 
 watch product tutorial https://drive.google.com/file/d/1uyqr6BvJI4Fq3xagxexVYLDrZM9dSBAh/view?usp=sharing
 
