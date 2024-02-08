@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.exchangerateservice.entities.ExchangeResponse;
 
-@FeignClient(name = "exchange-rate" ,url = "https://open.er-api.com")
+
+@FeignClient(name = "${exchange.name}" ,url = "${exchange.url}")
 public interface ExternalFeign {
     
-    @GetMapping("/v6/latest/USD")
+    @GetMapping("/USD")
     public abstract ExchangeResponse getExchangeRate();
 }
