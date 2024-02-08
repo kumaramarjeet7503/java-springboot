@@ -11,7 +11,7 @@ import com.contact.smartmanagerspringsecurity.entitity.User;
 import java.util.List;
 
 public interface ContactRepository extends JpaRepository < Contact , Integer> {
-    @Query("select u from Contact u where u.user.id = :userId")
+    @Query("select u from Contact u where u.user.id = :userId order by 1 desc")
     public  Page<Contact> getContactsByUserId(@Param("userId") Integer userId,Pageable pageable ) ;
 
     public List<Contact> findContactByNameContainingAndUser(String name, User user) ;

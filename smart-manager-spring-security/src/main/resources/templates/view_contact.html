@@ -15,11 +15,10 @@
                 <input class="form-control" onkeyup="getSearch(this)" id="search-input" placeholder="search your contacts here"></div>
                 <div id="search-result" >  </div>
               </div>
-
+              <div style="padding: 2vmax;">
                 <table class="table">
-                    <thead class="thead bg-primary">
+                    <thead class="thead bg-primary text-white">
                       <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Work</th>
                         <th scope="col">Email</th>
@@ -30,8 +29,7 @@
                     <tbody>
 
                       <tr th:each="c : ${contacts}">
-                        <th scope="row"  th:text="${c.cId}" ></th>
-                        <td ><img id="profilePic" th:src="@{'/images/'+${c.image}}"><span th:text="${c.name}"></span></td>
+                        <td ><span th:text="${c.name}"></span></td>
                         <td th:text="${c.work}"></td>
                         <td ><a  th:text="${c.email}" th:href="@{'/user/brief-contact/'+${c.cId}}"></a></td>
                         <td th:text="${c.phone}"></td>
@@ -39,7 +37,8 @@
                       </tr>
                     </tbody>
                   </table>
-                  <nav aria-label="Page navigation example">
+                  </div >
+                  <nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
                     <ul class="pagination">
                       <li th:if="${currentPage != 0}" class="page-item"><a class="page-link" th:href="@{'/user/view-contact/'+${currentPage - 1}}">Previous</a></li>
                       <li th:classAppend="${currentPage == i -1 ? 'active' : ''}" th:each="i : ${#numbers.sequence(1,totalPage)}" class="page-item"><a class="page-link" th:text="${i}" th:href="@{'/user/view-contact/'+${i-1}}"></a></li>

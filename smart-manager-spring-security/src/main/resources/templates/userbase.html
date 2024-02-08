@@ -43,8 +43,8 @@
         </nav>
         <!-- Navbar ends -->
 
-        <div class="sidebar" style="display: none;" id="sidebar">
-          <span class="closeBtn" style="color: black; font-weight: bold;" onclick="manageNav()">X</span>
+        <div class="sidebar" style="display: none; transition: all 0.5s;" id="sidebar">
+          <span class="closeBtn" style="color: black; font-weight: bold; font-size: larger; transition: all 0.5s;" onclick="manageNav()">X</span>
             <a th:href="@{/user/index}" class="item">Home</a>
             <a th:href="@{/user/view-contact/0}" class="item">View Contacts</a>
             <a th:href="@{/user/add-contact}" class="item">Add Contact</a>
@@ -56,7 +56,7 @@
         <!-- Content -->
         
         <div class="content" id="content">
-          <span id="reopen" style="font-weight: bolder; "  onclick="manageNav()" >☰</span>
+          <span id="reopen" style="font-weight: bolder;    font-size: x-large; transition: all 1s; "  onclick="manageNav()" >☰</span>
           
           <div th:if="${session.message}" >
           <div  class="text-center alert " th:classAppend="${session.message.type}" role="alert">
