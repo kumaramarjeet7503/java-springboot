@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exchangerateservice.entities.ExchangeResponse;
@@ -19,10 +20,11 @@ public class ExchangeRateController {
     private ExternalFeign externalFeign ;
     
     @GetMapping("/get-rate")
-    public ResponseEntity<HashMap> getExchangeRate()
+    public ResponseEntity<Double> getExchangeRate(@RequestParam Double amount, @RequestParam String code)
     {
         ExchangeResponse response = this.externalFeign.getExchangeRate() ;
-
-        return ResponseEntity.ok(response.getRates()) ;
+        HashMap<String, Double> rates =  response.getRates() ;
+        Double codeExchangeRate = rates.get(code) * amount ;
+        return ResponseEntity.ok(codeExchangeRate) ;
     }
 }
