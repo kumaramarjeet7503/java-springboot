@@ -1,5 +1,6 @@
 package com.exchangerateservice.controllers;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,13 @@ public class ExchangeRateController {
     private ExternalFeign externalFeign ;
     
     @GetMapping("/get-rate")
-    public ResponseEntity<Double> getExchangeRate(@RequestParam Double amount, @RequestParam String code)
+    public ResponseEntity<?> getExchangeRate(@RequestParam Double amount, @RequestParam String code)
     {
         ExchangeResponse response = this.externalFeign.getExchangeRate() ;
         HashMap<String, Double> rates =  response.getRates() ;
         Double codeExchangeRate = rates.get(code) * amount ;
-        return ResponseEntity.ok(codeExchangeRate) ;
+        DecimalFormat decimalFormat =  new DecimalFormat("#.##");
+        String output = decimalFormat.format(codeExchangeRate) ;
+        return ResponseEntity.ok(output) ;
     }
 }
