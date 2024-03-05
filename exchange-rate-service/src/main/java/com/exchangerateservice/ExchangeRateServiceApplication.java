@@ -11,7 +11,7 @@ import com.exchangerateservice.config.ExchangeProperties;
 @EnableFeignClients
 @EnableConfigurationProperties(ExchangeProperties.class)
 public class ExchangeRateServiceApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ExchangeRateServiceApplication.class, args);
 	}
