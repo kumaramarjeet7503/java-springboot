@@ -10,6 +10,10 @@ Login management with spring security which makes the work so easy to integrate 
 Form design in thymleaf with dynamic content. which helps in scaling application with it's reusable fragment component.
 
 
+### Jwt Integration
+![Screenshot (176)](https://github.com/kumaramarjeet7503/java-springboot/assets/64517073/f58a40e8-8f16-43c2-a2b8-a25a022391ae)
+
+
 ### Screenshots
 ![Dashboard](https://github.com/kumaramarjeet7503/java-springboot/assets/64517073/27c48cc5-05f4-4729-87b7-68b8b52be419)
 ![Screenshot (141)](https://github.com/kumaramarjeet7503/java-springboot/assets/64517073/b5622f96-9e3e-40d0-9792-2c35091c95f7)
