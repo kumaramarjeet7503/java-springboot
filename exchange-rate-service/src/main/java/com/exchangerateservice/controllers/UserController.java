@@ -8,6 +8,9 @@ import com.exchangerateservice.pojo.AuthRequest;
 import com.exchangerateservice.service.JwtService;
 import com.exchangerateservice.service.UserService;
 
+import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,8 +37,12 @@ public class UserController {
     @Autowired
     private JwtService jwtService ;
 
+    Logger logger = LogManager.getLogger(UserController.class);
+
     @GetMapping("/dashboard")
     public String getDashboard() {
+        logger.info("this is the testing log");
+        logger.debug("this is the debug logger");
         return new String("Welcome to authentication dashboard");
     }
 
